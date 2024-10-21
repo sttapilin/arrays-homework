@@ -23,7 +23,7 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
     @Override
     public E get(int index) {
         return null;
-    }
+    }esgrg
 
     @Override
     public int size() {
