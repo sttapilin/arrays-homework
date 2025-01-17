@@ -18,7 +18,9 @@ public class DefaultCustomArrayListTest {
     public void testAddAndGetSize() {
         assertTrue(list.add(1));
         assertTrue(list.add(2));
-        assertEquals(2, list.size());
+        assertTrue(list.add(3)); // добавлен
+        assertTrue(list.add(0)); // добавлен
+        assertEquals(4, list.size()); // expected изменен на 4
     }
 
     @Test
