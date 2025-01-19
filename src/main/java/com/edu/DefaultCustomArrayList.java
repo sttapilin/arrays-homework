@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static java.time.temporal.TemporalAdjusters.next;
+
 public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
     int size = 0;
     E[] array;
@@ -75,7 +77,7 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
         return false;
     }
 
-    class CustomArrayListIterator implements Iterator<E> {
+   /* class CustomArrayListIterator implements Iterator<E> {
         private int index = 0;
 
         public boolean hasNext() {
@@ -88,10 +90,26 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
             }
             return get(index++);
         }
-    }
+    }*/
 
     @Override
     public Iterator<E> iterator() {
-        return new CustomArrayListIterator();
+        return new Iterator<E>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < array.length;
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return get(index++);
+                //return (E) array [index++];
+            }
+        };
     }
 }
