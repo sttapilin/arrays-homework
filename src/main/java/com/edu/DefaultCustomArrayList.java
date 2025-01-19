@@ -2,6 +2,7 @@ package com.edu;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
     int size = 0;
@@ -74,9 +75,23 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
         return false;
     }
 
+    class CustomArrayListIterator implements Iterator<E> {
+        private int index = 0;
+
+        public boolean hasNext() {
+            return index < array.length;
+        }
+
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return get(index++);
+        }
+    }
+
     @Override
     public Iterator<E> iterator() {
-
-        return null;
+        return new CustomArrayListIterator();
     }
 }
